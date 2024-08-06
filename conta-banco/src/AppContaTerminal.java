@@ -2,33 +2,60 @@ import java.util.Scanner;
 
 public class AppContaTerminal {
    public static void main(String[] args) {
+        //iniciando o uso da classe
+        ContaTerminal contaTerminal = new ContaTerminal(); 
 
-        ContaTerminal contaTerminal = new ContaTerminal();     
+        //iniciando uso do scanner  
         Scanner scanner = new Scanner(System.in);
 
+        //input de usuário nome
         System.out.println(("Digite seu Nome: "));
-        contaTerminal.nomeCliente = scanner.next();
-        //System.out.println("Cliente nome: " + contaTerminal.nomeCliente); 
-
+        contaTerminal.criarNomeCliente(scanner.next());
+        
+        //input de usuário sobrenome
         System.out.println(("Digite seu Sobrenome: "));
-        contaTerminal.sobrenomeCliente = scanner.next();
-        //System.out.println("Cliente Sobrenome: " + contaTerminal.sobrenomeCliente); 
+        contaTerminal.criarSobrenomeCliente(scanner.next());
 
+        //input de usuário número da agência       
         System.out.println(("Digite número Agência: "));
-        contaTerminal.numeroAgencia = scanner.next();
-        //System.out.println("Sua Agência é: " + contaTerminal.numeroAgencia); 
-        
+        contaTerminal.criarNumeroAgencia(scanner.next());
+         
+        ////input de usuário número da conta
         System.out.println(("Digite número Conta: "));
-        contaTerminal.numeroConta = scanner.nextInt();
-        //System.out.println("Seu número de conta é: " + contaTerminal.numeroConta);         
-
-        contaTerminal.criarConta();
-        System.out.println("Sua conta foi criada " + contaTerminal.contaCriada); 
-
-        String nomeCompleto = contaTerminal.nomeCliente + " " + contaTerminal.sobrenomeCliente;
+        contaTerminal.criarNumeroConta(scanner.nextInt());        
         
-        System.out.println("Olá " + nomeCompleto +" ,OBRIGADO   por criar uma conta em nosso BANCO, sua AGÊNCIA é " + contaTerminal.numeroAgencia + 
-        " , CONTA " + contaTerminal.numeroConta + " e seu SALDO " + contaTerminal.saldoConta + " ,já está DISPONÍVEL para saque.");
+        // criando var que conacatena nome e sobrenome
+        String nomeCompleto = contaTerminal.nomeCliente + " " + contaTerminal.sobrenomeCliente;      
+        
+        //usando input de entrada de valores para obter saldo na conta             
+        System.out.println("Digite valor depósito: ");
+        double valorDeposito = scanner.nextDouble();
+        contaTerminal.depositarConta(valorDeposito);
+        System.out.println("Saldo Atual: " + contaTerminal.saldoConta);
+
+        //usando input para retirada de valores do saldo na conta 
+        System.out.println("Deseja realizar saque de valor em conta: S para Sim e N para Não: ");
+        String opcao = scanner.next().toUpperCase();
+        //usando condição para retirada ou não de valores
+        if(opcao.equals("S")){
+        System.out.println("Digite valor saque: ");
+        double valorSaque = scanner.nextDouble();
+            if(contaTerminal.saldoConta > valorSaque){
+            contaTerminal.sacarConta(valorSaque);
+            System.out.println("Saldo Atual: " + contaTerminal.saldoConta);}
+            else{
+                System.out.println("Saldo Insuficiente para saque.");
+            }
+        }else{
+            System.out.println("Fim.");
+        }
+
+        // imprimindo mensagem
+        System.out.println("Olá " + nomeCompleto +" ,OBRIGADO   por criar uma conta em nosso BANCO, sua AGÊNCIA é " 
+        + contaTerminal.numeroAgencia + " , CONTA " + contaTerminal.numeroConta + " e seu SALDO R$ " + contaTerminal.saldoConta + 
+        " ,já está DISPONÍVEL para saque.");
+
+
    }}
 
       
